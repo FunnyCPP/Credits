@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Credits</string>
+
+    <!--Countries-->
+    <string name="countries_title">Деньги всем</string>
+    <string name="countries_detail">Для продолжения необходимо выбрать страну</string>
+    <string name="countries_choose">Выбрать</string>
+    <string name="countries_politics">Используя приложение, вы сошлашаетьсь с политикой конфиденциальности</string>
+    <string name="country_name_default">Украина</string>
+
+    <!--Categories -->
+    <string name="categories_title">Деньги всем</string>
+    <string name="categories_detail">Выберете услугу, которой хотите воспользоваться</string>
+    <string name="category_title_default">Микрозаймы</string>
+    <string name="category_suggestion_default">5 предложений</string>
+
+    <!-- Offer-->
+    <string name="offer_advice">Подайте заявку в 3–4 организации для 100% одобрения!</string>
+    <string name="offer_loan_default"> Первый зайи: 0%</string>
+    <string name="offer_sum_title_default">Сумма:</string>
+    <string name="offer_sum_default">от 500 грн</string>
+    <string name="offer_rate_title_default">Ставка:</string>
+    <string name="offer_rate_default">от 0%</string>
+    <string name="offer_detail">Подробнее</string>
+
+</resources>
