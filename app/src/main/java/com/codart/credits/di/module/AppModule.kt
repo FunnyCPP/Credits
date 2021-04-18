@@ -1,11 +1,11 @@
 package com.codart.credits.di.module
 
 import android.content.Context
-import com.codart.credits.data.local.CountriesDao
-import com.codart.credits.data.local.CountriesDatabase
-import com.codart.credits.data.remote.CountriesRemoteDataSource
-import com.codart.credits.data.remote.CountriesService
+import com.codart.credits.data.local.*
+import com.codart.credits.data.remote.*
+import com.codart.credits.data.repository.CategoriesRepository
 import com.codart.credits.data.repository.CountriesRepository
+import com.codart.credits.data.repository.OffersRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -52,5 +52,47 @@ object AppModule {
     fun provideRepository(remoteDataSource: CountriesRemoteDataSource,
                           localDataSource: CountriesDao) =
         CountriesRepository(remoteDataSource, localDataSource)
+
+    @Provides
+    fun provideCategoriesService(retrofit: Retrofit): CategoriesService = retrofit.create(CategoriesService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideCategoriesRemoteDataSource(categoriesService: CategoriesService) = CategoriesRemoteDataSource(categoriesService)
+
+    @Singleton
+    @Provides
+    fun provideCategoriesDatabase(@ApplicationContext appContext: Context) = CategoriesDatabase.getDatabase(appContext)
+
+    @Singleton
+    @Provides
+    fun provideCategoriesDao(db: CategoriesDatabase) = db.categoriesDao()
+
+    @Singleton
+    @Provides
+    fun provideCategoriesRepository(remoteDataSource: CategoriesRemoteDataSource,
+                          localDataSource: CategoriesDao) =
+            CategoriesRepository(remoteDataSource, localDataSource)
+
+    @Provides
+    fun provideOffersService(retrofit: Retrofit): OffersService = retrofit.create(OffersService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideOffersRemoteDataSource(offersService: OffersService) = OffersRemoteDataSource(offersService)
+
+    @Singleton
+    @Provides
+    fun provideOffersDatabase(@ApplicationContext appContext: Context) = OffersDatabase.getDatabase(appContext)
+
+    @Singleton
+    @Provides
+    fun provideOffersDao(db: OffersDatabase) = db.offersDao()
+
+    @Singleton
+    @Provides
+    fun provideOffersRepository(remoteDataSource: OffersRemoteDataSource,
+                                    localDataSource: OffersDao) =
+            OffersRepository(remoteDataSource, localDataSource)
 
 }

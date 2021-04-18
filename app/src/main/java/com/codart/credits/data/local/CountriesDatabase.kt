@@ -15,7 +15,7 @@ abstract class CountriesDatabase : RoomDatabase() {
         @Volatile private var instance: CountriesDatabase? = null
 
         fun getDatabase(context: Context): CountriesDatabase =
-            instance ?: synchronized(this) { instance ?: buildDatabase(context).also { instance = it } }
+                instance ?: synchronized(this) { instance ?: buildDatabase(context).also { instance = it } }
 
         private fun buildDatabase(appContext: Context) =
             Room.databaseBuilder(appContext, CountriesDatabase::class.java, "countries")
