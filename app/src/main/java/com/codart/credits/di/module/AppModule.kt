@@ -5,13 +5,13 @@ import com.codart.credits.data.local.*
 import com.codart.credits.data.remote.*
 import com.codart.credits.data.repository.CategoriesRepository
 import com.codart.credits.data.repository.CountriesRepository
+import com.codart.credits.data.repository.OfferDetailRepository
 import com.codart.credits.data.repository.OffersRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
@@ -30,7 +30,7 @@ object AppModule {
         .build()
 
     @Provides
-    fun provideGson(): Gson = GsonBuilder().create()
+    fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
     @Provides
     fun provideCountriesService(retrofit: Retrofit): CountriesService = retrofit.create(CountriesService::class.java)
@@ -81,18 +81,26 @@ object AppModule {
     @Provides
     fun provideOffersRemoteDataSource(offersService: OffersService) = OffersRemoteDataSource(offersService)
 
-    @Singleton
+   /* @Singleton
     @Provides
     fun provideOffersDatabase(@ApplicationContext appContext: Context) = OffersDatabase.getDatabase(appContext)
 
     @Singleton
     @Provides
-    fun provideOffersDao(db: OffersDatabase) = db.offersDao()
+    fun provideOffersDao(db: OffersDatabase) = db.offersDao()*/
 
     @Singleton
     @Provides
-    fun provideOffersRepository(remoteDataSource: OffersRemoteDataSource,
-                                    localDataSource: OffersDao) =
-            OffersRepository(remoteDataSource, localDataSource)
+    fun provideOffersRepository(remoteDataSource: OffersRemoteDataSource) = OffersRepository(remoteDataSource)
 
+    @Provides
+    fun provideOfferDetailService(retrofit: Retrofit): OfferDetailService = retrofit.create(OfferDetailService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideOfferDetailRemoteDataSource(offerDetailService: OfferDetailService) = OfferDetailRemoteDataSource(offerDetailService)
+
+    @Singleton
+    @Provides
+    fun provideOfferDetailRepository(remoteDataSource: OfferDetailRemoteDataSource) = OfferDetailRepository(remoteDataSource)
 }

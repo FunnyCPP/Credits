@@ -11,7 +11,7 @@ import com.codart.credits.data.entities.Country
 class CountriesAdapter(private val listener: CharacterItemListener) : RecyclerView.Adapter<CountriesViewHolder>() {
 
     interface CharacterItemListener {
-        fun onClickedCharacter(characterId: Int)
+        fun onClickedCharacter(id: Int)
     }
 
     private val items = ArrayList<Country>()
@@ -35,7 +35,7 @@ class CountriesAdapter(private val listener: CharacterItemListener) : RecyclerVi
     override fun onBindViewHolder(holder: CountriesViewHolder, position: Int) = holder.bind(items[position])
 }
 
-class CountriesViewHolder(private val itemView: View, private val listener: CountriesAdapter.CharacterItemListener) : RecyclerView.ViewHolder(
+class CountriesViewHolder(itemView: View, private val listener: CountriesAdapter.CharacterItemListener) : RecyclerView.ViewHolder(
     itemView),
     View.OnClickListener {
 

@@ -11,4 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+    companion object{
+        var country_id: Int = 176
+        var category_id: Int = 59
+        var product_id: Int = 46
+    }
 }

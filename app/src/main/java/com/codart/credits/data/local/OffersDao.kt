@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.codart.credits.data.entities.Offer
 
+/*
 @Dao
 interface OffersDao {
     @Query("SELECT * FROM offers WHERE country_id =:country_id")
@@ -14,4 +15,4 @@ interface OffersDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(characters: List<Offer>)
-}
+}*/

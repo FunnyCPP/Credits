@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase
 import com.codart.credits.data.entities.Offer
 import com.codart.credits.data.entities.OfferCategory
 
+/*
 @Database(entities = [Offer::class], version = 1, exportSchema = false)
 abstract class OffersDatabase: RoomDatabase() {
 
@@ -25,4 +26,4 @@ abstract class OffersDatabase: RoomDatabase() {
                         .fallbackToDestructiveMigration()
                         .build()
     }
-}
+}*/

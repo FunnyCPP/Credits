@@ -22,3 +22,16 @@ fun <T, A> performGetOperation(databaseQuery: () -> LiveData<T>,
             emitSource(source)
         }
     }
+fun <T> performGetOperationWithoutDB(networkCall: suspend () -> Resource<T>): LiveData<Resource<T>> =
+        liveData(Dispatchers.IO) {
+            emit(Resource.loading())
+
+            val responseStatus = networkCall.invoke()
+            if (responseStatus.status == Resource.Status.SUCCESS) {
+                val resource: Resource<T> = Resource(data =  responseStatus.data, status = Resource.Status.SUCCESS, message = "")
+               emit(resource)
+
+            } else if (responseStatus.status == Resource.Status.ERROR) {
+                emit(Resource.error(responseStatus.message!!))
+            }
+        }

@@ -1,18 +1,18 @@
 package com.codart.credits.ui.countries
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codart.credits.R
+import com.codart.credits.ui.MainActivity
 import com.codart.credits.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -45,9 +45,8 @@ class CountriesFragment : Fragment(), CountriesAdapter.CharacterItemListener {
     }
 
     private fun setupObservers() {
-        val title = requireView().findViewById<TextView>(R.id.countries_title)
 
-        viewModel.countries.observe(viewLifecycleOwner, Observer {
+        viewModel.countries.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     if (!it.data.isNullOrEmpty()) adapter.setItems(ArrayList(it.data))
@@ -61,7 +60,9 @@ class CountriesFragment : Fragment(), CountriesAdapter.CharacterItemListener {
         })
     }
 
-    override fun onClickedCharacter(characterId: Int) {
+    override fun onClickedCharacter(id: Int) {
         Timber.d("Click")
+        MainActivity.country_id = id
+        findNavController().navigate(R.id.action_countriesFragment_to_categoriesFragment)
     }
 }

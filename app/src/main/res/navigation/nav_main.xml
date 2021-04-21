@@ -9,5 +9,32 @@
         android:id="@+id/countriesFragment"
         android:name="com.codart.credits.ui.countries.CountriesFragment"
         android:label="countries_fragment"
-        tools:layout="@layout/countries_fragment" />
+        tools:layout="@layout/countries_fragment" >
+        <action
+            android:id="@+id/action_countriesFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.codart.credits.ui.categories.CategoriesFragment"
+        android:label="categories_fragment"
+        tools:layout="@layout/categories_fragment" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_offersFragment"
+            app:destination="@id/offersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/offersFragment"
+        android:name="com.codart.credits.ui.offers.OffersFragment"
+        android:label="fragment_offers"
+        tools:layout="@layout/fragment_offers" >
+        <action
+            android:id="@+id/action_offersFragment_to_offerDetailFragment"
+            app:destination="@id/offerDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/offerDetailFragment"
+        android:name="com.codart.credits.ui.offer_detail.OfferDetailFragment"
+        android:label="fragment_offer_detail"
+        tools:layout="@layout/fragment_offer_detail" />
 </navigation>

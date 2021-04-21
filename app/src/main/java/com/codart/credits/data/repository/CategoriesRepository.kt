@@ -9,9 +9,9 @@ class CategoriesRepository  @Inject constructor(
         private val remoteDataSource: CategoriesRemoteDataSource,
         private val localDataSource: CategoriesDao
 ) {
-    fun getCategories() = performGetOperation(
+    fun getCategories(country_id: Int) = performGetOperation(
             databaseQuery = { localDataSource.getCategories() },
-            networkCall = { remoteDataSource.getCategories() },
+            networkCall = { remoteDataSource.getCategories(country_id) },
             saveCallResult = { localDataSource.insertAll(it.data) }
     )
 }
